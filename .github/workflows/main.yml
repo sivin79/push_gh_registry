@@ -1,10 +1,11 @@
-name: "GitHub-registry-CI-CD"
+name: "GitHub-registry-CI-CD-DEV"
 
 on:
   push:
     branches:
       - dev
-
+env:
+  HASH: ${{ github.sha }}
 
 jobs:
   my-docker:
