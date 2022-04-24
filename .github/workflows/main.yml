@@ -1,0 +1,23 @@
+name: "GitHub-registry-CI-CD"
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  HASH: ${{ github.sha }}
+
+jobs:
+  my-docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@main
+
+      - name: "Build"
+        run: docker build -t sivin79/push_gh_registry:latest .
+        
+      - name: "Push"
+        run: docker push ghcr.io/sivin79/push_gh_registry:latest
