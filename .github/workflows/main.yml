@@ -1,11 +1,9 @@
-name: "GitHub-registry-CI-CD-DEV"
+name: "GitHub-registry-CI-CD"
 
 on:
   push:
     branches:
-      - dev
-env:
-  HASH: ${{ github.sha }}
+      - main
 
 jobs:
   my-docker:
@@ -19,7 +17,7 @@ jobs:
         run: docker login ghcr.io -u sivin79 --password "${{secrets.CR_PAT}}"
 
       - name: "Build"
-        run: docker build -t ghcr.io/sivin79/push_gh_registry:${{env.HASH}} .
+        run: docker build -t ghcr.io/sivin79/push_gh_registry:latest .
         
       - name: "Push"
-        run: docker push ghcr.io/sivin79/push_gh_registry:${{env.HASH}}
+        run: docker push ghcr.io/sivin79/push_gh_registry:latest
